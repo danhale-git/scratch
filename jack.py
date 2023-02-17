@@ -39,4 +39,9 @@ with open(csv_file, 'r') as file:
         # Send the API request
         response = requests.post(url, auth=auth, headers=headers, data=json.dumps(payload))
 
-        print(response.content.decode('utf-8')) # I added this for debugging
+        # Check if the request was successful
+        if not response:
+            print(f"request for {payload} failed with status code {response.status_code}: {response.reason}")
+        else:
+            # Print something about the successful request
+            print(response.content.decode('utf-8'))
